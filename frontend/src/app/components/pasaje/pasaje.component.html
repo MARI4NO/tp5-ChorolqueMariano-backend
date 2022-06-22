@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2 ">
+        <div class="row d-flex">
+            <div class="col-7 ">
+                <select class="form-select m-2" aria-label="Default select example" name ="categoria"[(ngModel)] ="categoria">
+                    <option value="m">Menor</option>
+                    <option value="j">Jubilado</option>
+                    <option value="a">adulto</option>
+                </select>
+            </div>
+            <div class="col-5 ">
+                <button type="button" class="btn btn-primary m-2" (click)="obtenerPorCategoria()">Filtrar Pasajes</button>
+            <button type="button" class="btn btn-primary m-2" (click)="obtenerTodos()">obtener Pasajes</button>
+            
+            </div>
+        </div>
+        
+       
+        <table class="table caption-top">
+            <caption>Lista de Pasajes</caption>
+            <thead class="text-center">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">dni</th>
+                    <th scope="col"> Mas Opciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr *ngFor="let pas of pasajes">
+                    
+                    <td>{{pas._id}}</td>
+                    <td>{{pas.precioPasaje }}</td>
+                    <td>{{pas.categoriaPasajero}}</td>
+                    <td>{{pas.fechaCompra }}</td>
+                    <td>{{pas.pasajero.nro_documento}}</td>
+                    <td class="p-2">
+                        <button class="btn btn-success m-1" (click)="actualizarPasaje(pas._id)" >editar</button>
+                       
+                        <button class ="btn btn-danger m-1" (click)="eliminarPasaje(pas._id)">eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-6 offset-3">
+       <!-- <button class="btn bg-primary" (click)="llamarFormAgregarPasajero()">Agregar Usuario</button> -->
+    </div>
+</div>

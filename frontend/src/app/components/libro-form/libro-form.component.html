@@ -1,0 +1,70 @@
+<div class="container  ">
+<div class="row">
+    <div class="col-8 offset-2 text-center">
+        <form action="" method="POST" #libroForm="ngForm">
+            <h3>Formulario carga de Libros</h3>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="titulo" name="titulo" [(ngModel)]="libro.titulo" #titulo="ngModel" placeholder="asd" required>
+                <label for="titulo" class="form-label">Titulo</label>
+                
+                <div *ngIf="titulo.invalid" class="alert alert-danger my-1 p-1">
+                    <div *ngIf="titulo.errors?.['required']">
+                        El titulo es requerido
+                    </div>
+                </div>
+            </div>
+
+            <div class=" mb-3">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <textarea class="form-control" name="descripcion" id="descripcion" rows="4"
+                    [(ngModel)]="libro.descripcion" #descripcion="ngModel" placeholder="asd" required></textarea>
+
+                <div *ngIf="descripcion.invalid" class="alert alert-danger my-1 p-1">
+                    <div *ngIf="descripcion.errors?.['required']">
+                        La descripcion es requerida
+                    </div>
+                </div>
+            </div>
+
+        
+            <div class=" mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="url" class="form-control" name="imagen" id="imagen" [(ngModel)]="libro.imagen"
+                    #imagen="ngModel"  required>
+                <div *ngIf="imagen.invalid" class="alert alert-danger my-1 p-1">
+                    <div *ngIf="imagen.errors?.['required']">
+                        La imagen es requerida
+                    </div>
+                </div>
+            </div>
+            <div class=" mb-3">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" class="form-control" name="stock" id="stock" [(ngModel)]="libro.stock"
+                    #stock="ngModel" required min="0">
+                <div *ngIf="stock.invalid" class="alert alert-danger my-1 p-1">
+                    <div *ngIf="stock.errors?.['required']">
+                        EL stock es requerido
+                    </div>
+                    <div *ngIf="stock.errors?.['min']">
+                        EL stock debe ser mayor o igual a 0
+                    </div>
+                </div>
+            </div>
+            <div class=" mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" [(ngModel)]="libro.destacado" type="checkbox"
+                        id="destacado" name="destacado">
+                    <label class="form-check-label" for="destacado">
+                        Destacado
+                    </label>
+                </div>
+            </div>
+
+            <div class=" mb-3">
+                <button type="submit" class="btn btn-primary" [disabled]="libroForm.form.invalid" (click)="guardar() ">Registrar Libro</button>
+            </div>
+        </form>
+    </div>    
+</div>
+</div>

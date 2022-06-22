@@ -1,0 +1,81 @@
+<div class="container mt-2">
+    <div class="row p-2">
+        <div class="col-4 offset-4">
+            <form method="post" #divisaForm="ngForm">
+                <legend>Conversor de Divisas</legend>
+                <div class="mb-3">
+                    <label for="cantidad" class="form-label" >Cantidad</label>
+                    <input type="number" class="form-control" id="cantidad" aria-describedby="emailHelp" name="cantidad" placeholder="123456789" [(ngModel)] = "transaccion.cantidadOrigen" required min="0" required #amount="ngModel" step="any">
+                    <div id="leyenda1" class="form-text">Cuidado con los controles financieros</div>
+                    
+                    <div *ngIf="amount.invalid" class="alert alert-danger my-1 p-1">
+                        <div *ngIf="amount.errors?.['required']">
+                            La cantidad es requerida
+                        </div>
+                        <div *ngIf="amount.errors?.['min']">
+                            La cantidad tiene que ser mayor a 0
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="tasaConversion" class="form-label">Tasa de Conversion: </label>
+                    <input type="number" class="form-control" name="tasaConversion" id="tasaConversion"[(ngModel)]="transaccion.tasaConversion" required  min="0" step="any" #tasa="ngModel">
+                    <div *ngIf="tasa.invalid" class="alert alert-danger my-1 p-1">
+                        <div *ngIf="tasa.errors?.['required']">
+                            La tasa de conversion es requerida
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="monedaOrigen" class="form-label">Moneda Inicial</label>
+
+                    <select class="form-select" aria-label="Default select example"id="monedaOrigen" name ="origen"[(ngModel)] ="transaccion.monedaOrigen" required #have="ngModel">
+                        <option value="USD" >USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="BRL">BRL</option>
+                        <option value="ARS">ARS</option>
+                    </select>
+                    <div *ngIf="have.invalid" class="alert alert-danger my-1 p-1">
+                        <div *ngIf="have.errors?.['required']">
+                            La divisa de origen es requerida
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="moneda2" class="form-label">Moneda Final</label>
+                    <select class="form-select" aria-label="Default select example" name ="destino" id="moneda2" [(ngModel)] ="transaccion.monedaDestino" required #want="ngModel" >
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="BRL">BRL</option>
+                        <option value="ARS">ARS</option>
+                    </select>
+                    <div *ngIf="want.invalid" class="alert alert-danger my-1 p-1">
+                        <div *ngIf="want.errors?.['required']">
+                            La divisa de destino es requerida
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="emailCliente" class="form-label">Email</label>
+                    <input type="email" name="emailCliente" id="emailCliente" class="form-control" [(ngModel)]="transaccion.emailCliente" required #email="ngModel" >
+                    <div *ngIf="email.invalid" class="alert alert-danger my-1 p-1">
+                        <div *ngIf="email.errors?.['required']">
+                            El email es requerido
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3" >
+                    <label class="form-label" for="final">Total:</label>
+                    <textarea id="final" class="form-control" aria-label="With textarea" value = "{{transaccion.cantidadDestino}}" ></textarea>
+                </div>
+                <div class="mb-3 text-center">
+                    <button type="submit" class="btn btn-primary" (click)="guardar()" [disabled]="divisaForm.form.invalid">Convertir</button>
+                </div>
+                
+            </form>
+                
+
+                 
+        </div>
+    </div>
+</div>

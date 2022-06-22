@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-8 offset-2">
+        <form method="post" #pasajeForm="ngForm">
+            <h1>Formulario de carga de Pasajes</h1>
+            <div class=" mb-3">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="number" class="form-control" id="precio" name="precio" [(ngModel)]="pasaje.precioPasaje" #precio="ngModel" required min="0" step="any">
+                <div *ngIf="precio.invalid" class="alert alert-danger my-1 p-1">
+                    <div *ngIf="precio.errors?.['required']">
+                        El precio es requerido
+                    </div>
+                    <div *ngIf="precio.errors?.['min']">
+                        El precio debe ser mayor o igual a 0
+                    </div>
+                </div> 
+            </div>
+            
+            <div class="mb-3">
+                <label for="persona">Seleccione persona</label>
+                <select class="form-select" [(ngModel)]="pasaje.pasajero" name="DNI" #pasajero="ngModel" required>
+                    <option *ngFor="let pas of personas" [ngValue]="pas">{{pas.nro_documento}}</option>
+                </select>
+                <div *ngIf="pasajero.invalid" class="alert alert-danger my-1 p-1">
+                    <div *ngIf="pasajero.errors?.['required']">
+                        El pasajero es requerido
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="categoriaPasaje">Seleccione la Categoria del Pasaje</label>
+                <select class="form-select" aria-label="Default select example" id="categoriaPasaje" name="categoriaPasajero" [(ngModel)]="pasaje.categoriaPasajero" #categoria="ngModel" required>
+                    <option selected value="m">Menor</option>
+                    <option value="a">Adulto</option>
+                    <option value="j">Jubilado</option>
+                </select>
+                <div *ngIf="categoria.invalid" class="alert alert-danger my-1 p-1">
+                    <div *ngIf="categoria.errors?.['required']">
+                        La categoria es requerida
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3 form-check">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <label class="form-check-label" for="fechaPasaje">Fecha del Pasaje: </label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" id="fechaPasaje" name="fechaPasaje" value="2022-01-01" [(ngModel)]="pasaje.fechaCompra">
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" (click)="guardar() "  [disabled]="pasajeForm.form.invalid"> {{action}} Pasaje</button>
+           
+    
+    
+        </form>
+    </div>    
+</div>
+

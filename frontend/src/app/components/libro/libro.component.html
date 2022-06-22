@@ -1,0 +1,20 @@
+<div class="row m-2">
+    <div class="col-md-4 offset-md-4 text-center">
+        <div class="card w-auto ">
+            <img [src]="libro.imagen" class="card-img-top" alt="...">
+            <div class="card-body text-dark ">
+                <h5 class="card-title">{{libro.titulo}}</h5>
+                <p class="card-text">{{libro.descripcion}}</p>
+                <p class="card-text">Stock: {{libro.stock}}</p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-4 offset-4">
+        <button (click)="anterior()" class="btn btn-outline-primary">Anterior</button>
+        <button (click)="siguiente()" class="btn btn-outline-success">Siguiente</button>
+    </div>
+
+</div>
